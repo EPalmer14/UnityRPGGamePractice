@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public float dashDir { get; private set; }
     [SerializeField] private float dashCooldown;
     private float dashUsageTimer;
+    private float tester;
 
     [Header("Collision Info")]
     [SerializeField] private Transform groundCheck;
