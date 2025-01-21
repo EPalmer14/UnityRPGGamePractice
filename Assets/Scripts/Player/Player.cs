@@ -19,11 +19,6 @@ public class Player : Entity
     [SerializeField] private float dashCooldown;
     private float dashUsageTimer;
 
-
-    #region Components
-    public Animator anim { get; private set; }
-    public Rigidbody2D rb { get; private set; }
-    #endregion
     public PlayerStateMachine stateMachine { get; private set; }
 
     #region States
@@ -40,6 +35,8 @@ public class Player : Entity
 
     protected override void Awake()
     {
+        base.Awake();
+
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
@@ -55,8 +52,8 @@ public class Player : Entity
 
     protected override void Start()
     {
-        anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
+
         stateMachine.Initialize(idleState);
     }
 
@@ -65,6 +62,8 @@ public class Player : Entity
 
     protected override void Update()
     {
+        base.Update();
+
         stateMachine.currentState.Update();
 
         CheckForDashInput();
@@ -103,15 +102,6 @@ public class Player : Entity
             stateMachine.ChangeState(dashState);
         }
     }
-
-    #region Velocity
-    public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
-    public void SetVelocity(float _xVelocity, float _yVelocity)
-    {
-        rb.velocity = new Vector2(_xVelocity, _yVelocity);
-        FlipController(_xVelocity);
-    }
-    #endregion
 
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishedTrigger();
 }

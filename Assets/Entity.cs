@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    #region Components
+    public Animator anim { get; private set; }
+    public Rigidbody2D rb { get; private set; }
+    #endregion
+
     [Header("Collision Info")]
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
@@ -22,7 +27,8 @@ public class Entity : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-
+        anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -30,6 +36,15 @@ public class Entity : MonoBehaviour
     {
 
     }
+
+    #region Velocity
+    public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+    public void SetVelocity(float _xVelocity, float _yVelocity)
+    {
+        rb.velocity = new Vector2(_xVelocity, _yVelocity);
+        FlipController(_xVelocity);
+    }
+    #endregion
 
     #region Collision
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
