@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-
     public EnemyStateMachine stateMachine { get; private set; }
 
     protected override void Awake()
