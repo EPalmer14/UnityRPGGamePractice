@@ -20,6 +20,8 @@ public class Enemy_Skeleton : Enemy
     protected override void Start()
     {
         base.Start();
+
+        stateMachine.Initialize(idleState);
     }
 
     protected override void Update()

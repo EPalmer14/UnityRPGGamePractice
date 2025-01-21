@@ -25,7 +25,7 @@ public class SkeletonMoveState : EnemyState
     {
         base.Update();
 
-        enemy.SetVelocity(2 * enemy.facingDir, enemy.rb.velocity.y);
+        enemy.SetVelocity(enemy.moveSpeed * enemy.facingDir, enemy.rb.velocity.y);
 
         if (enemy.IsWallDetected() || !enemy.IsGroundDetected())
         {
