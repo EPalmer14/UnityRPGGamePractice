@@ -30,6 +30,7 @@ public class SkeletonBattleState : EnemyState
             {
                 Debug.Log("Attack!");
                 enemy.ZeroVelocity();
+                return;
             }
         }
 
