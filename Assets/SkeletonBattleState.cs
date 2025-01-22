@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,15 @@ public class SkeletonBattleState : EnemyState
     public override void Update()
     {
         base.Update();
+
+        if (enemy.IsPlayerDetected())
+        {
+            if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
+            {
+                Debug.Log("Attack!");
+                enemy.ZeroVelocity();
+            }
+        }
 
         if (player.position.x > enemy.transform.position.x)
         {
