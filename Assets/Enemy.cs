@@ -6,12 +6,15 @@ using UnityEngine;
 public class Enemy : Entity
 {
     [SerializeField] protected LayerMask whatIsPlayer;
+
     [Header("Move Info")]
     public float moveSpeed;
     public float idleTime;
 
     [Header("Attack Info")]
     public float attackDistance;
+    public float attackCooldown;
+    [HideInInspector] public float lastTimeAttacked;
 
     public EnemyStateMachine stateMachine { get; private set; }
 
@@ -24,6 +27,7 @@ public class Enemy : Entity
     protected override void Update()
     {
         base.Update();
+
         stateMachine.currentState.Update();
     }
 

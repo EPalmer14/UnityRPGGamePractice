@@ -7,7 +7,7 @@ public class SkeletonBattleState : EnemyState
 {
     private Transform player;
     private Enemy_Skeleton enemy;
-    private int moveDirection;
+    private int moveDir;
     public SkeletonBattleState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, Enemy_Skeleton enemy) : base(_enemyBase, _stateMachine, _animBoolName)
     {
         this.enemy = enemy;
@@ -28,24 +28,38 @@ public class SkeletonBattleState : EnemyState
         {
             if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
             {
-                stateMachine.ChangeState(enemy.attackState);
+                if (CanAttack())
+                {
+                    stateMachine.ChangeState(enemy.attackState);
+                }
             }
         }
 
         if (player.position.x > enemy.transform.position.x)
         {
-            moveDirection = 1;
+            moveDir = 1;
         }
         else if (player.position.x < enemy.transform.position.x)
         {
-            moveDirection = -1;
+            moveDir = -1;
         }
 
-        enemy.SetVelocity(enemy.moveSpeed * moveDirection, rb.velocity.y);
+        enemy.SetVelocity(enemy.moveSpeed * moveDir, rb.velocity.y);
     }
 
     public override void Exit()
     {
         base.Exit();
+    }
+
+    private bool CanAttack()
+    {
+        if (Time.time >= enemy.lastTimeAttacked + enemy.attackCooldown)
+        {
+            return true;
+        }
+
+        Debug.Log("Attack is on cooldown");
+        return false;
     }
 }
