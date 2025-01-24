@@ -29,7 +29,7 @@ public class SkeletonBattleState : EnemyState
             if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
             {
                 Debug.Log("Attack!");
-                enemy.ZeroVelocity();
+                enemy.SetZeroVelocity();
                 return;
             }
         }
