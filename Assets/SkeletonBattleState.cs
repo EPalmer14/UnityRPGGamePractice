@@ -28,9 +28,7 @@ public class SkeletonBattleState : EnemyState
         {
             if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
             {
-                Debug.Log("Attack!");
-                enemy.SetZeroVelocity();
-                return;
+                stateMachine.ChangeState(enemy.attackState);
             }
         }
 
