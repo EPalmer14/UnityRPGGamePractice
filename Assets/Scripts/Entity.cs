@@ -64,7 +64,15 @@ public class Entity : MonoBehaviour
     }
 
     #region Velocity
-    public void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
+    public void SetZeroVelocity()
+    {
+        if (isKnocked)
+        {
+            return;
+        }
+
+        rb.velocity = new Vector2(0, 0);
+    }
     public void SetVelocity(float _xVelocity, float _yVelocity)
     {
         if (isKnocked)
