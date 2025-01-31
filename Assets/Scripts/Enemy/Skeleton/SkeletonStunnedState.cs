@@ -9,4 +9,27 @@ public class SkeletonStunnedState : EnemyState
     {
         this.enemy = _enemy;
     }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        stateTimer = enemy.stunDuration;
+        enemy.SetVelocity(-enemy.facingDir * enemy.stunDirection.x, enemy.stunDirection.y);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (stateTimer < 0)
+        {
+            stateMachine.ChangeState(enemy.idleState);
+        }
+    }
 }
