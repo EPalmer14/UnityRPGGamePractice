@@ -31,8 +31,17 @@ public class PlayerCounterAttackState : PlayerState
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().Damage();
+                if (hit.GetComponent<Enemy>().CanBeStunned())
+                {
+                    stateTimer = 10; // anything more than 1
+                    player.anim.SetBool("SuccessfulCounterAttack", true);
+                }
             }
+        }
+
+        if (stateTimer < 0 || triggerCalled)
+        {
+            stateMachine.ChangeState(player.idleState);
         }
     }
 }
