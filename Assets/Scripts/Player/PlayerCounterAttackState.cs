@@ -25,6 +25,8 @@ public class PlayerCounterAttackState : PlayerState
     {
         base.Update();
 
+        player.SetZeroVelocity();
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
 
         foreach (var hit in colliders)
