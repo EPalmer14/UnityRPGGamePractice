@@ -8,6 +8,6 @@ public class DashSkill : Skill
     {
         base.UseSkill();
 
-
+        Debug.Log("Create clone behind");
     }
 }
