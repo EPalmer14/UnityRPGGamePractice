@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected float cooldown;
+    protected float cooldownTimer;
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        
+        cooldownTimer -= Time.deltaTime;
     }
 }
