@@ -18,8 +18,6 @@ public class Player : Entity
     public float dashSpeed;
     public float dashDuration;
     public float dashDir { get; private set; }
-    [SerializeField] private float dashCooldown;
-    private float dashUsageTimer;
 
     public PlayerStateMachine stateMachine { get; private set; }
 

@@ -6,7 +6,7 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager instance;
 
-    public DashSkill dash;
+    public DashSkill dash { get; private set; }
 
     private void Awake()
     {
