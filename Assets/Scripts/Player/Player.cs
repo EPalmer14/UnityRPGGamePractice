@@ -21,6 +21,8 @@ public class Player : Entity
 
     public PlayerStateMachine stateMachine { get; private set; }
 
+    public SkillManager skill { get; private set; }
+
     #region States
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }
@@ -56,6 +58,8 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+
+        skill = SkillManager.instance;
 
         stateMachine.Initialize(idleState);
     }
