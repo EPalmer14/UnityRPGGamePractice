@@ -11,6 +11,8 @@ public class CloneSkillController : MonoBehaviour
     [SerializeField] private Transform attackCheck;
     [SerializeField] private float attackCheckRadius = .8f;
 
+    private Transform closestEnemy;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -40,6 +42,9 @@ public class CloneSkillController : MonoBehaviour
         }
         transform.position = _newTransform.position;
         cloneTimer = _cloneDuration;
+
+
+        FaceClosestTarget();
     }
 
     private void AnimationTrigger()
@@ -56,6 +61,35 @@ public class CloneSkillController : MonoBehaviour
             if (hit.GetComponent<Enemy>() != null)
             {
                 hit.GetComponent<Enemy>().Damage();
+            }
+        }
+    }
+
+    private void FaceClosestTarget()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Enemy>() != null)
+            {
+                float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
+
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    closestEnemy = hit.transform;
+                }
+            }
+        }
+
+        if (closestEnemy != null)
+        {
+            if (transform.position.x > closestEnemy.position.x)
+            {
+                transform.Rotate(0, 180, 0);
             }
         }
     }
