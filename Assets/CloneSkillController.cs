@@ -5,12 +5,14 @@ using UnityEngine;
 public class CloneSkillController : MonoBehaviour
 {
     private SpriteRenderer sr;
+    private Animator anim;
     [SerializeField] private float colorLosingSpeed;
     private float cloneTimer;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -23,8 +25,12 @@ public class CloneSkillController : MonoBehaviour
         }
     }
 
-    public void SetupClone(Transform _newTransform, float _cloneDuration)
+    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack)
     {
+        if (_canAttack)
+        {
+            anim.SetInteger("AttackNumber", Random.Range(1, 3));
+        }
         transform.position = _newTransform.position;
         cloneTimer = _cloneDuration;
     }
