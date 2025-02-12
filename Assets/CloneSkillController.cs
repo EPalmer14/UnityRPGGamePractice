@@ -8,6 +8,8 @@ public class CloneSkillController : MonoBehaviour
     private Animator anim;
     [SerializeField] private float colorLosingSpeed;
     private float cloneTimer;
+    [SerializeField] private Transform attackCheck;
+    [SerializeField] private float attackCheckRadius = .8f;
 
     private void Awake()
     {
@@ -33,5 +35,23 @@ public class CloneSkillController : MonoBehaviour
         }
         transform.position = _newTransform.position;
         cloneTimer = _cloneDuration;
+    }
+
+    private void AnimationTrigger()
+    {
+        cloneTimer = -.1f;
+    }
+
+    private void AttackTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackCheckRadius);
+
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<Enemy>() != null)
+            {
+                hit.GetComponent<Enemy>().Damage();
+            }
+        }
     }
 }
