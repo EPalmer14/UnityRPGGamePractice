@@ -15,4 +15,10 @@ public class SwordSkillController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<CircleCollider2D>();
     }
+
+    public void SetupSword(Vector2 _dir, float _gravityScale)
+    {
+        rb.velocity = _dir;
+        rb.gravityScale = _gravityScale;
+    }
 }
