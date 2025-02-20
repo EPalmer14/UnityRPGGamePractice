@@ -42,6 +42,8 @@ public class SwordSkill : Skill
         SwordSkillController newSwordScript = newSword.GetComponent<SwordSkillController>();
 
         newSwordScript.SetupSword(finalDir, swordGravity);
+
+        DotsActive(false);
     }
 
     public Vector2 AimDirection()
