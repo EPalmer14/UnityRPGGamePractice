@@ -20,6 +20,13 @@ public class SwordSkill : Skill
 
     private GameObject[] dots;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        GenerateDots();
+    }
+
     protected override void Update()
     {
         if (Input.GetKeyUp(KeyCode.Mouse1))
