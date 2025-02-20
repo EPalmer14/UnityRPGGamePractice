@@ -26,6 +26,14 @@ public class SwordSkill : Skill
         {
             finalDir = new Vector2(AimDirection().normalized.x * launchForce.x, AimDirection().normalized.y * launchForce.y);
         }
+
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            for (int i = 0; i < dots.Length; i++)
+            {
+                dots[i].transform.position = DotsPosition(i * spaceBetweenDots);
+            }
+        }
     }
 
     public void CreateSword()
@@ -45,6 +53,14 @@ public class SwordSkill : Skill
         return direction;
     }
 
+    public void DotsActive(bool _isActive)
+    {
+        for (int i = 0; i < dots.Length; i++)
+        {
+            dots[i].SetActive(_isActive);
+        }
+    }
+
     private void GenerateDots()
     {
         dots = new GameObject[numberOfDots];
@@ -53,5 +69,14 @@ public class SwordSkill : Skill
             dots[i] = Instantiate(dotPrefab, player.transform.position, Quaternion.identity, dotsParent);
             dots[i].SetActive(false);
         }
+    }
+
+    private Vector2 DotsPosition(float t)
+    {
+        Vector2 position = (Vector2)player.transform.position + new Vector2(
+            AimDirection().normalized.x * launchForce.x,
+            AimDirection().normalized.y * launchForce.y) * t + .5f * (Physics2D.gravity * swordGravity) * (t * t);
+
+        return position;
     }
 }
