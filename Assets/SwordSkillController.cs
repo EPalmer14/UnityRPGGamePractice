@@ -9,7 +9,7 @@ public class SwordSkillController : MonoBehaviour
     private CircleCollider2D cd;
     private Player player;
 
-    private void Start()
+    private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
