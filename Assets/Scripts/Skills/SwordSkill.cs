@@ -12,7 +12,7 @@ public class SwordSkill : Skill
 
     private Vector2 finalDir;
 
-    private void Update()
+    protected override void Update()
     {
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
@@ -25,7 +25,7 @@ public class SwordSkill : Skill
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
         SwordSkillController newSwordScript = newSword.GetComponent<SwordSkillController>();
 
-        newSwordScript.SetupSword(launchForce, swordGravity);
+        newSwordScript.SetupSword(finalDir, swordGravity);
     }
 
     public Vector2 AimDirection()
