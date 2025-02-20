@@ -12,6 +12,6 @@ public class SwordSkill : Skill
 
     public void CreateSword()
     {
-        GameObject newSword = Instantiate(swordPrefab);
+        GameObject newSword = Instantiate(swordPrefab, );
     }
 }
