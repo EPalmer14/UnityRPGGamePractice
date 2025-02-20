@@ -12,6 +12,14 @@ public class SwordSkill : Skill
 
     private Vector2 finalDir;
 
+    [Header("Aim Dots")]
+    [SerializeField] private int numberOfDots;
+    [SerializeField] private float spaceBetweenDots;
+    [SerializeField] private GameObject dotPrefab;
+    [SerializeField] private Transform dotsParent;
+
+    private GameObject[] dots;
+
     protected override void Update()
     {
         if (Input.GetKeyUp(KeyCode.Mouse1))
@@ -35,5 +43,15 @@ public class SwordSkill : Skill
         Vector2 direction = mousePosition - playerPosition;
 
         return direction;
+    }
+
+    private void GenerateDots()
+    {
+        dots = new GameObject[numberOfDots];
+        for (int i = 0; i < numberOfDots; i++)
+        {
+            dots[i] = Instantiate(dotPrefab, player.transform.position, Quaternion.identity, dotsParent);
+            dots[i].SetActive(false);
+        }
     }
 }
