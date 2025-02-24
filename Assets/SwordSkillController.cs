@@ -9,7 +9,7 @@ public class SwordSkillController : MonoBehaviour
     private CircleCollider2D cd;
     private Player player;
 
-    private bool canRotate;
+    private bool canRotate = true;
 
     private void Awake()
     {
